@@ -33,9 +33,6 @@ public class RAM extends PointedMemory
     // The gui of the screen
     private ScreenGUI screen;
 
-    // memory segments mapping
-    private MemorySegment[][] segments;
-
     /**
      * Constructs a new RAM with the given optional GUI components:
      * mainGUI - the main GUI of the ram.
@@ -47,9 +44,8 @@ public class RAM extends PointedMemory
      *            address will be set according to the memory value at the entry's location.
      * screenGUI - the GUI of the screen.
      */
-    public RAM(PointedMemoryGUI mainGUI, MemorySegment[][] segments, ScreenGUI screenGUI) {
+    public RAM(PointedMemoryGUI mainGUI, ScreenGUI screenGUI) {
         super(Definitions.RAM_SIZE, mainGUI);
-        this.segments = segments;
         this.screen = screenGUI;
     }
 
@@ -64,17 +60,6 @@ public class RAM extends PointedMemory
              && address < Definitions.SCREEN_START_ADDRESS + Definitions.SCREEN_SIZE_IN_WORDS)
             screen.setValueAt((short)(address - Definitions.SCREEN_START_ADDRESS), value);
 
-        // if a memory segment pointer changed, update its GUI
-        if (segments != null && segments[address] != null) {
-
-            for (int i = 0; i < segments[address].length; i++) {
-                // check if the relevant memory segment is a pointed one.
-                if (segments[address][i] instanceof PointedMemorySegment)
-                    ((PointedMemorySegment)segments[address][i]).setPointerAddress(value);
-                else
-                    segments[address][i].setStartAddress(value);
-            }
-        }
     }
 
     /**
@@ -122,19 +107,5 @@ public class RAM extends PointedMemory
 
     public void refreshGUI() {
         super.refreshGUI();
-
-        // Update segments
-        if (segments != null)
-            for (int address = 0; address < size; address++) {
-                if (segments[address] != null) {
-                    for (int i = 0; i < segments[address].length; i++) {
-                        // check if the relevant memory segment is a pointed one.
-                        if (segments[address][i] instanceof PointedMemorySegment)
-                            ((PointedMemorySegment)segments[address][i]).setPointerAddress(mem[address]);
-                        else
-                            segments[address][i].setStartAddress(mem[address]);
-                    }
-                }
-            }
     }
 }

@@ -72,7 +72,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
      * Constructs a new CPU Emulator with no GUI component.
      */
     public CPUEmulator() {
-        RAM ram = new RAM(null, null, null);
+        RAM ram = new RAM(null, null);
         ram.reset();
 
         ROM rom = new ROM(null);
@@ -120,7 +120,7 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
     public CPUEmulator(CPUEmulatorGUI gui) {
         this.gui = gui;
 
-        RAM ram = new RAM(gui.getRAM(), null, gui.getScreen());
+        RAM ram = new RAM(gui.getRAM(), gui.getScreen());
         ram.addErrorListener(this);
         ram.reset();
 
