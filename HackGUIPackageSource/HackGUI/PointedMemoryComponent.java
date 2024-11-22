@@ -54,6 +54,10 @@ public class PointedMemoryComponent extends MemoryComponent implements PointedMe
             Utilities.tableCenterScroll(this, memoryTable, pointerAddress);
     }
 
+    public int getPointer () {
+        return pointerAddress;
+    }
+
 
     /**
      * Implementing the action of the table gaining the focus.

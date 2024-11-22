@@ -17,6 +17,8 @@
 
 package Hack.ComputerParts;
 
+import Hack.CPUEmulator.RAM;
+
 /**
  * A computer bus. Allows sending values between computer parts.
  */
@@ -64,6 +66,22 @@ public class Bus extends ComputerPart {
         }
 
         targetPart.setValueAt(targetIndex, sourcePart.getValueAt(sourceIndex), false);
+    }
+
+    public synchronized void send1(ValueComputerPart sourcePart, int sourceIndex,
+                                   RAM targetPart, int targetIndex) {
+
+        if (animate && sourcePart.animate && hasGUI) {
+            try {
+                wait(100);
+            } catch (InterruptedException ie) {}
+
+            gui.move(((ValueComputerPartGUI)sourcePart.getGUI()).getCoordinates(sourceIndex),
+                     ((ValueComputerPartGUI)targetPart.getGUI()).getCoordinates(targetIndex),
+                     ((ValueComputerPartGUI)sourcePart.getGUI()).getValueAsString(sourceIndex));
+        }
+
+        targetPart.setValueAt1(targetIndex, sourcePart.getValueAt(sourceIndex), false);
     }
 
     public void refreshGUI() {}

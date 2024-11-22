@@ -19,6 +19,7 @@ package Hack.CPUEmulator;
 
 import Hack.Utilities.*;
 import Hack.ComputerParts.*;
+import HackGUI.PointedMemoryComponent;
 
 /**
  * A Random Access Memory, which is mapped to a screen, and enables a segmented view on it.
@@ -54,6 +55,7 @@ public class RAM extends PointedMemory
      */
     public void setValueAt(int address, short value, boolean quiet) {
         super.setValueAt(address, value, quiet);
+        super.setPointerAddress(address);
 
         // if screen area changed, update its GUI
         if (screen != null && address >= Definitions.SCREEN_START_ADDRESS
@@ -62,28 +64,19 @@ public class RAM extends PointedMemory
 
     }
 
-    /**
-     * Sets a name for the label at the given address
-     */
-    public synchronized void setLabel(int address, String name, boolean quiet) {
-        if (hasGUI && gui instanceof LabeledPointedMemoryGUI) {
-            ((LabeledPointedMemoryGUI)gui).setLabel(address, name);
-            if (!quiet) {
-                ((LabeledPointedMemoryGUI)gui).labelFlash(address);
-                try {
-                    wait(LABEL_FLASH_TIME);
-                } catch (InterruptedException ie) {}
-                ((LabeledPointedMemoryGUI)gui).hideLabelFlash();
-            }
+    public void setValueAt1(int address, short value, boolean quiet) {
+        super.setValueAt(address, value, quiet);
+        if(((PointedMemoryComponent)(super.getGUI())).getPointer() == address) {
+            super.setPointerAddress(-1);
+            super.setPointerAddress1(address);
         }
-    }
+        super.setPointerAddress1(address);
 
-    /**
-     * Clears all labels.
-     */
-    public void clearLabels() {
-        if (hasGUI && gui instanceof LabeledPointedMemoryGUI)
-            ((LabeledPointedMemoryGUI)gui).clearLabels();
+        // if screen area changed, update its GUI
+        if (screen != null && address >= Definitions.SCREEN_START_ADDRESS
+             && address < Definitions.SCREEN_START_ADDRESS + Definitions.SCREEN_SIZE_IN_WORDS)
+            screen.setValueAt((short)(address - Definitions.SCREEN_START_ADDRESS), value);
+
     }
 
     /**

@@ -52,6 +52,7 @@ public class PointedMemory extends Memory {
 
     public void reset() {
         setPointerAddress(0);
+        setPointerAddress1(0);
         super.reset();
     }
 }

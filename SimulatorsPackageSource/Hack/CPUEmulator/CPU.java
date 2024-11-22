@@ -372,7 +372,7 @@ public class CPU
 										   address +
 										   " is an illegal memory address.");
             A1.setUpdatePointer(true);
-			bus1.send(alu1, 2, M, address);
+			bus1.send1(alu1, 2, M, address);
             A1.setUpdatePointer(false);
         }
         if (destA)

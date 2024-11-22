@@ -252,6 +252,49 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         }
     }
 
+    public void setValue1(String varName, String value) throws VariableException {
+        int numValue;
+
+        try {
+            value = Conversions.toDecimalForm(value);
+
+            if (varName.equals(VAR_A)) {
+                numValue = Integer.parseInt(value);
+                check_ram_address(varName, numValue);
+                cpu.getA().store((short)numValue);
+            }
+            else if (varName.equals(VAR_D)) {
+                numValue = Integer.parseInt(value);
+                check_value(varName, numValue);
+                cpu.getD().store((short)numValue);
+            }
+            else if (varName.equals(VAR_PC)) {
+                numValue = Integer.parseInt(value);
+                check_rom_address(varName, numValue);
+                cpu.getPC().store((short)numValue);
+            }
+            else if (varName.equals(VAR_TIME))
+                throw new VariableException("Read Only variable", varName);
+            else if (varName.startsWith(VAR_RAM + "[")) {
+                short index = getRamIndex(varName);
+                numValue = Integer.parseInt(value);
+                check_value(varName, numValue);
+                cpu.getRAM().setValueAt(index, (short)numValue, false);
+            }
+            else if (varName.startsWith(VAR_ROM + "[")) {
+                short index = getRomIndex(varName);
+                numValue = Integer.parseInt(value);
+                check_value(varName, numValue);
+                cpu.getROM().setValueAt(index, (short)numValue, false);
+            }
+            else
+                throw new VariableException("Unknown variable", varName);
+        } catch (NumberFormatException nfe) {
+            throw new VariableException("'" + value + "' is not a legal value for variable",
+                                        varName);
+        }
+    }
+
     /**
      * Executes the given simulator command (given in args[] style).
      * Throws CommandException if the command is not legal.
