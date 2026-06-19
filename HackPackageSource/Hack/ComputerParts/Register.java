@@ -51,7 +51,6 @@ public class Register extends InteractiveValueComputerPart implements ComputerPa
 
         if (hasGUI) {
             gui.addListener(this);
-            gui.addErrorListener(this);
         }
     }
 

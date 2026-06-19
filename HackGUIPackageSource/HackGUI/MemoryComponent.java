@@ -30,9 +30,6 @@ import javax.swing.table.*;
  */
 public class MemoryComponent extends JPanel implements MemoryGUI {
 
-    // The default number of visible rows.
-    protected static final int DEFAULT_VISIBLE_ROWS = 10;
-
     /**
      * The current format.
      */
@@ -44,17 +41,11 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     // A vector containing the clear listeners to this object.
     private Vector clearListeners;
 
-    // A vector containing the error listeners to this object.
-    private Vector errorEventListeners;
-
     // A vector containing the repaint listeners to this object.
     private Vector changeListeners;
 
     // The table representing the memory.
     protected JTable memoryTable;
-
-    // The model of the table.
-    private MemoryTableModel tableModel = new MemoryTableModel();
 
     // The values of this memory in a string representation.
     protected String[] valuesStr;
@@ -119,7 +110,6 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
 
         listeners = new Vector();
         clearListeners = new Vector();
-        errorEventListeners = new Vector();
         changeListeners = new Vector();
         highlightIndex = new Vector();
         memoryTable = new JTable(getTableModel());
@@ -225,45 +215,6 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
         ClearEvent clearEvent = new ClearEvent(this);
         for(int i=0; i<clearListeners.size();i++)
             ((ClearEventListener)clearListeners.elementAt(i)).clearRequested(clearEvent);
-    }
-
-    /**
-     * Registers the given ErrorEventListener as a listener to this GUI.
-     */
-    public void addErrorListener(ErrorEventListener listener) {
-        errorEventListeners.addElement(listener);
-    }
-
-    /**
-     * Un-registers the given ErrorEventListener from being a listener to this GUI.
-     */
-    public void removeErrorListener(ErrorEventListener listener) {
-        errorEventListeners.removeElement(listener);
-    }
-
-   /**
-     * Notifies all the ErrorEventListener on an error in this gui by
-     * creating an ErrorEvent (with the error message) and sending it
-     * using the errorOccured method to all the listeners.
-     */
-    public void notifyErrorListeners(String errorMessage) {
-        ErrorEvent event = new ErrorEvent(this, errorMessage);
-        for (int i=0; i<errorEventListeners.size(); i++)
-            ((ErrorEventListener)errorEventListeners.elementAt(i)).errorOccured(event);
-    }
-
-    /**
-     * Registers the given MemoryChangeListener as a listener to this GUI.
-     */
-    public void addChangeListener(MemoryChangeListener listener) {
-        changeListeners.addElement(listener);
-    }
-
-    /**
-     * Un-registers the given MemoryChangeListener from being a listener to this GUI.
-     */
-    public void removeChangeListener(MemoryChangeListener listener) {
-        changeListeners.removeElement(listener);
     }
 
     /**
@@ -395,14 +346,6 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     }
 
     /**
-     * Selects the commands in the range fromIndex..toIndex
-     */
-    public void select(int fromIndex,int toIndex) {
-        memoryTable.setRowSelectionInterval(fromIndex,toIndex);
-        Utilities.tableCenterScroll(this, memoryTable, fromIndex);
-    }
-
-    /**
      * Hides all selections.
      */
     public void hideSelect() {
@@ -498,7 +441,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
         searchButton.setBounds(new Rectangle(159, 2, 31, 25));
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                searchButton_actionPerformed(e);
+                searchButton_actionPerformed();
             }
         });
         memoryTable.setFont(Utilities.valueFont);
@@ -510,7 +453,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
 
         clearButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                clearButton_actionPerformed(e);
+                clearButton_actionPerformed();
             }
         });
         clearButton.setIcon(clearIcon);
@@ -552,10 +495,6 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
         }
     }
 
-    public void scrollTo(int index) {
-        Utilities.tableCenterScroll(this, memoryTable, index);
-    }
-
     /**
      * Implementing the action of the table gaining the focus.
      */
@@ -574,14 +513,14 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
     /**
      * Implementing the action of pressing the search button.
      */
-    public void searchButton_actionPerformed(ActionEvent e) {
+    public void searchButton_actionPerformed() {
         searchWindow.showWindow();
     }
 
     /**
      * Implementing the action of pressing the clear button.
      */
-    public void clearButton_actionPerformed(ActionEvent e) {
+    public void clearButton_actionPerformed() {
 
         Object[] options = {"Yes", "No","Cancel"};
         int pressedButtonValue = JOptionPane.showOptionDialog(this.getParent(),
@@ -656,7 +595,6 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
                         values[row] = translateValueToShort(data);
                     notifyListeners((short)row,values[row]);
                 } catch(TranslationException te) {
-                    notifyErrorListeners(te.getMessage());
                     valuesStr[row] = translateValueToString(values[row]);
                 }
                 repaint();

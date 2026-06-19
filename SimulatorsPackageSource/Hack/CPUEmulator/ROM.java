@@ -30,20 +30,6 @@ import Hack.Assembler.*;
  */
 public class ROM extends PointedMemory implements ProgramEventListener
 {
-    /**
-     * Decimal numeric format
-     */
-    public static final int DECIMAL_FORMAT = HackController.DECIMAL_FORMAT;
-
-    /**
-     * Hexadecimal numeric format
-     */
-    public static final int HEXA_FORMAT = HackController.HEXA_FORMAT;
-
-    /**
-     * Binary numeric format
-     */
-    public static final int BINARY_FORMAT = HackController.BINARY_FORMAT;
 
     /**
      * Assembler format
@@ -85,8 +71,6 @@ public class ROM extends PointedMemory implements ProgramEventListener
 
             if (displayChanges) {
                 gui.setContents(mem);
-
-                ((ROMGUI)gui).setProgram(fileName);
 
                 ((ROMGUI)gui).hideMessage();
                 gui.hideHighlight();

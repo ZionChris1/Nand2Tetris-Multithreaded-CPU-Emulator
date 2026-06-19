@@ -35,9 +35,6 @@ public abstract class InteractiveValueComputerPart extends ValueComputerPart
     // The current enabled range
     private int startEnabledRange, endEnabledRange;
 
-    // If true, disabled range will be gray
-    private boolean grayDisabledRange;
-
     /**
      * Constructs a new InteractiveValueComputerPart.
      * If hasGUI is true, the ComputerPart will display its contents.
@@ -103,14 +100,6 @@ public abstract class InteractiveValueComputerPart extends ValueComputerPart
     }
 
     /**
-     * Called when an error occured in the GUI.
-     * The event contains the source object and the error message.
-     */
-    public void errorOccured(ErrorEvent event) {
-        notifyErrorListeners(event.getErrorMessage());
-    }
-
-    /**
      * Called when the contents of the memory are changed through the memory gui.
      */
     public void valueChanged(ComputerPartEvent event) {
@@ -144,31 +133,9 @@ public abstract class InteractiveValueComputerPart extends ValueComputerPart
             ((InteractiveValueComputerPartGUI)getGUI()).disableUserInput();
     }
 
-    /**
-     * Returns the enabled range as a 2-element int array.
-     */
-    public int[] getEnabledRange() {
-        return new int[]{startEnabledRange, endEnabledRange};
-    }
-
-    /**
-     * Sets the enabled range of this segment.
-     * Any address outside this range will be disabled for user input.
-     * If gray is true, addresses outside the range will be gray colored.
-     * The start & end addresses are absolute
-     */
-    public void setEnabledRange(int start, int end, boolean gray) {
-        startEnabledRange = start;
-        endEnabledRange = end;
-        grayDisabledRange = gray;
-
-        if (displayChanges)
-            ((InteractiveValueComputerPartGUI)getGUI()).setEnabledRange(start, end, gray);
-    }
-
     public void refreshGUI() {
         if (displayChanges && startEnabledRange != -1 && endEnabledRange != -1) {
-            ((InteractiveValueComputerPartGUI)getGUI()).setEnabledRange(startEnabledRange, endEnabledRange, grayDisabledRange);
+            ((InteractiveValueComputerPartGUI)getGUI()).setEnabledRange(startEnabledRange, endEnabledRange, false);
         }
     }
 }

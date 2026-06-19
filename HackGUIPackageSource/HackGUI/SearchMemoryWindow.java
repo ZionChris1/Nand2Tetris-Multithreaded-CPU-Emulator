@@ -19,7 +19,6 @@ package HackGUI;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
 
 /**
  * This class represents a search window for the use of MemoryComponent, ROMComponent,
@@ -74,7 +73,7 @@ public class SearchMemoryWindow extends JFrame {
         rowNumber.setBounds(new Rectangle(102, 25, 158, 18));
         rowNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                rowNumber_actionPerformed(e);
+                rowNumber_actionPerformed();
             }
         });
         okButton.setToolTipText("Ok");
@@ -82,13 +81,13 @@ public class SearchMemoryWindow extends JFrame {
         okButton.setBounds(new Rectangle(49, 60, 63, 44));
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                okButton_actionPerformed(e);
+                okButton_actionPerformed();
             }
         });
         cancelButton.setBounds(new Rectangle(176, 60, 63, 44));
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cancelButton_actionPerformed(e);
+                cancelButton_actionPerformed();
             }
         });
         cancelButton.setToolTipText("Cancel");
@@ -105,7 +104,7 @@ public class SearchMemoryWindow extends JFrame {
     /**
      * Implementing the action of pressing the OK button.
      */
-    public void okButton_actionPerformed(ActionEvent e) {
+    public void okButton_actionPerformed() {
         try {
             int row = Format.translateValueToShort(rowNumber.getText(), Format.DEC_FORMAT);
             table.setRowSelectionInterval(row,row);
@@ -118,7 +117,7 @@ public class SearchMemoryWindow extends JFrame {
     /**
      * Implementing the action of pressing the cancel button.
      */
-    public void cancelButton_actionPerformed(ActionEvent e) {
+    public void cancelButton_actionPerformed() {
         setVisible(false);
     }
 
@@ -126,7 +125,7 @@ public class SearchMemoryWindow extends JFrame {
      * Implementing the action of pressing 'enter' on the text field
      * (this action is similar to pressing the ok button).
      */
-    public void rowNumber_actionPerformed(ActionEvent e) {
-        okButton_actionPerformed(e);
+    public void rowNumber_actionPerformed() {
+        okButton_actionPerformed();
     }
 }

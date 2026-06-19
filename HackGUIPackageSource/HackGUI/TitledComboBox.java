@@ -59,11 +59,7 @@ public class TitledComboBox extends JPanel {
         add(title, BorderLayout.NORTH);
         add(combo, BorderLayout.SOUTH);
 
-        combo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                notifyListeners(e);
-            }
-        });
+        combo.addActionListener(this::notifyListeners);
 
         title.setFont(Utilities.thinLabelsFont);
 
@@ -92,13 +88,6 @@ public class TitledComboBox extends JPanel {
      */
     public boolean isSelectedIndex(int index) {
         return combo.getSelectedIndex() == index;
-    }
-
-    /**
-     * Return true if the given item is the slected one.
-     */
-    public boolean isSelectedItem(String item) {
-        return combo.getSelectedItem().equals(item);
     }
 
     /**

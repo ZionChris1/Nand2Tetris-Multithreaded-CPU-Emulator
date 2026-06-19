@@ -29,10 +29,4 @@ public class AssemblerException extends Exception {
         super(message);
     }
 
-    /**
-     * Constructs a new AssemblerException with the given message and Line number.
-     */
-    public AssemblerException(String message, int lineNumber) {
-        super("In line " + lineNumber + ", " + message);
-    }
 }

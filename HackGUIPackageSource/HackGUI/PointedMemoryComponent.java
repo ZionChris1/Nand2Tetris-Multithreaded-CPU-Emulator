@@ -31,9 +31,6 @@ public class PointedMemoryComponent extends MemoryComponent implements PointedMe
     protected int pointerAddress = -1;
     protected int pointerAddress1 = -1;
 
-    // Indicates whether this component has the focus
-    protected boolean hasFocus = false;
-
     protected DefaultTableCellRenderer getCellRenderer() {
         return new PointedMemoryTableCellRenderer();
     }
@@ -64,7 +61,6 @@ public class PointedMemoryComponent extends MemoryComponent implements PointedMe
      */
     public void memoryTable_focusGained(FocusEvent e) {
         super.memoryTable_focusGained(e);
-        hasFocus = true;
     }
 
     /**
@@ -72,7 +68,6 @@ public class PointedMemoryComponent extends MemoryComponent implements PointedMe
      */
     public void memoryTable_focusLost(FocusEvent e) {
         super.memoryTable_focusLost(e);
-        hasFocus = false;
     }
 
     // An inner class which implemets the cell renderer of the program table, giving

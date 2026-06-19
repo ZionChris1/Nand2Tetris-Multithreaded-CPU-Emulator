@@ -20,7 +20,6 @@ package HackGUI;
 import Hack.Controller.Breakpoint;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 
 /**
@@ -140,7 +139,7 @@ public class BreakpointVariablesWindow extends JFrame {
         nameCombo.setBounds(new Rectangle(180, 10, 124, 19));
         nameCombo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                nameCombo_actionPerformed(e);
+                nameCombo_actionPerformed();
             }
         });
         okButton.setToolTipText("Ok");
@@ -148,13 +147,13 @@ public class BreakpointVariablesWindow extends JFrame {
         okButton.setBounds(new Rectangle(61, 74, 63, 44));
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                okButton_actionPerformed(e);
+                okButton_actionPerformed();
             }
         });
         cancelButton.setBounds(new Rectangle(180, 74, 63, 44));
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cancelButton_actionPerformed(e);
+                cancelButton_actionPerformed();
             }
         });
         cancelButton.setToolTipText("Cancel");
@@ -174,7 +173,7 @@ public class BreakpointVariablesWindow extends JFrame {
     /**
      * Implementing the action of pressing the ok button.
      */
-    public void okButton_actionPerformed(ActionEvent e) {
+    public void okButton_actionPerformed() {
         breakpoint = new Breakpoint(nameTxt.getText(),valueTxt.getText());
         setVisible(false);
         notifyListeners();
@@ -183,14 +182,14 @@ public class BreakpointVariablesWindow extends JFrame {
     /**
      * Implementing the action of pressing the cancel button.
      */
-    public void cancelButton_actionPerformed(ActionEvent e) {
+    public void cancelButton_actionPerformed() {
         setVisible(false);
     }
 
     /**
      * Implementing the action of changing the selected item in the combo box.
      */
-    public void nameCombo_actionPerformed(ActionEvent e) {
+    public void nameCombo_actionPerformed() {
         String name = (String)nameCombo.getSelectedItem();
         nameTxt.setText(name);
     }

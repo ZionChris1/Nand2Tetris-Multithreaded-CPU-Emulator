@@ -47,11 +47,6 @@ public interface ROMGUI extends PointedMemoryGUI {
     void notifyProgramListeners(byte eventType, String programFileName);
 
     /**
-     * Sets the current program file name with the given name.
-     */
-    void setProgram(String programFileName);
-
-    /**
      * Displays the given message.
      */
     void showMessage(String message);

@@ -108,9 +108,6 @@ public class HackController
      */
     public static final int NO_ADDITIONAL_DISPLAY = 3;
 
-    // The default dir for loading script files
-    private static final String INITIAL_SCRIPT_DIR = "scripts";
-
     // Minimum and maximum mili-seconds per script command execution
     private static final int MAX_MS = 2500;
     private static final int MIN_MS = 25;
@@ -455,19 +452,19 @@ public class HackController
                 doOutputListCommand(command);
                 break;
             case Command.OUTPUT_COMMAND:
-                doOutputCommand(command);
+                doOutputCommand();
                 break;
             case Command.ECHO_COMMAND:
                 doEchoCommand(command);
                 break;
             case Command.CLEAR_ECHO_COMMAND:
-                doClearEchoCommand(command);
+                doClearEchoCommand();
                 break;
             case Command.BREAKPOINT_COMMAND:
                 doBreakpointCommand(command);
                 break;
             case Command.CLEAR_BREAKPOINTS_COMMAND:
-                doClearBreakpointsCommand(command);
+                doClearBreakpointsCommand();
                 break;
             case Command.REPEAT_COMMAND:
                 repeatCounter = (Integer) command.getArg();
@@ -582,7 +579,7 @@ public class HackController
     }
 
     // Executes the controller's output command.
-    private void doOutputCommand(Command command) throws ControllerException, VariableException {
+    private void doOutputCommand() throws ControllerException, VariableException {
         if (output == null)
             throw new ControllerException("No output file specified");
 
@@ -628,7 +625,7 @@ public class HackController
     }
 
     // Executes the controller's Clear-echo command.
-    private void doClearEchoCommand(Command command) {
+    private void doClearEchoCommand() {
         lastEcho = "";
         if (gui != null)
             gui.displayMessage("", false);
@@ -646,7 +643,7 @@ public class HackController
     }
 
     // Executes the controller's clear-breakpoints command.
-    private void doClearBreakpointsCommand(Command command) {
+    private void doClearBreakpointsCommand() {
         breakpoints.removeAllElements();
         gui.setBreakpoints(breakpoints);
     }
@@ -1041,19 +1038,12 @@ public class HackController
                     displayMessage((String)event.getData(), true);
                     break;
                 default:
-                    doUnknownAction(event.getAction(), event.getData());
                     break;
             }
         } catch (ScriptException | ControllerException e) {
             displayMessage(e.getMessage(), true);
             stopMode();
         }
-    }
-
-    /**
-     * Executes an unknown controller action event.
-     */
-    protected void doUnknownAction(byte action, Object data) {
     }
 
     // Performs the single step task

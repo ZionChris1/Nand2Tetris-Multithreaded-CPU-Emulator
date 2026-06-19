@@ -48,17 +48,8 @@ public interface MemoryGUI extends InteractiveValueComputerPartGUI {
     void setContents(short[] values);
 
     /**
-     * Selects the commands in the range fromIndex..toIndex
-     */
-    void select(int fromIndex, int toIndex);
-
-    /**
      * Hides all selections.
      */
     void hideSelect();
 
-    /**
-     * Scrolls the memory such that the given address will be on top.
-     */
-    void scrollTo(int address);
 }

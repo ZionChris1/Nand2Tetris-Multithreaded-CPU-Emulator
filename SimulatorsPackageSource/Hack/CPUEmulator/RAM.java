@@ -19,15 +19,12 @@ package Hack.CPUEmulator;
 
 import Hack.Utilities.*;
 import Hack.ComputerParts.*;
-import HackGUI.PointedMemoryComponent;
 
 /**
  * A Random Access Memory, which is mapped to a screen, and enables a segmented view on it.
  */
 public class RAM extends PointedMemory
 {
-    // The amount of miliseconds that a label should flash.
-    private static final int LABEL_FLASH_TIME = 500;
 
     private static final short[] emptyScreen = new short[Definitions.SCREEN_SIZE_IN_WORDS];
 
@@ -66,10 +63,6 @@ public class RAM extends PointedMemory
 
     public void setValueAt1(int address, short value, boolean quiet) {
         super.setValueAt(address, value, quiet);
-        if(((PointedMemoryComponent)(super.getGUI())).getPointer() == address) {
-            super.setPointerAddress(-1);
-            super.setPointerAddress1(address);
-        }
         super.setPointerAddress1(address);
 
         // if screen area changed, update its GUI

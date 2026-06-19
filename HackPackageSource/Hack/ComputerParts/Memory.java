@@ -41,15 +41,6 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
         init(size, gui);
     }
 
-    /**
-     * Constructs a new Memory with the given size, a memory GUI and the
-     * legal values range.
-     */
-    public Memory(int size, MemoryGUI gui, short minValue, short maxValue) {
-        super(gui != null, minValue, maxValue);
-        init(size, gui);
-    }
-
     // Initializes the memory
     private void init(int size, MemoryGUI gui) {
         this.size = size;
@@ -60,7 +51,6 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
             gui.setContents(mem);
             gui.addListener(this);
             gui.addClearListener(this);
-            gui.addErrorListener(this);
         }
     }
 
@@ -115,25 +105,8 @@ public class Memory extends InteractiveValueComputerPart implements ClearEventLi
             gui.setContents(mem);
     }
 
-    /**
-     * Scrolls the memory such that the given address will be on top.
-     * (assumes legal address).
-     */
-    public void scrollTo(int address) {
-        if (displayChanges)
-            gui.scrollTo(address);
-    }
-
     public void clearRequested(ClearEvent event) {
         reset();
-    }
-
-    /**
-     * Selects the commands in the range fromIndex..toIndex
-     */
-    public void select(int fromIndex, int toIndex) {
-        if (displayChanges)
-            gui.select(fromIndex, toIndex);
     }
 
     /**

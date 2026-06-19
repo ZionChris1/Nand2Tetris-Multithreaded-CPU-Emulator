@@ -112,17 +112,6 @@ public class HackAssemblerTranslator {
     }
 
     /**
-     * Returns the code which represents the given exp text.
-     * If doesn't exist, throws AssemblerException.
-     */
-    public short getExpByText(String text) throws AssemblerException {
-        Short code = (Short)expToCode.get(text);
-        if (code == null)
-            throw new AssemblerException("Illegal exp: " + text);
-        return code;
-    }
-
-    /**
      * Returns the text which represents the given exp code.
      * If doesn't exist, throws AssemblerException.
      */
@@ -134,17 +123,6 @@ public class HackAssemblerTranslator {
     }
 
     /**
-     * Returns the code which represents the given dest text.
-     * If doesn't exist, throws AssemblerException.
-     */
-    public short getDestByText(String text) throws AssemblerException {
-        Short code = (Short)destToCode.get(text);
-        if (code == null)
-            throw new AssemblerException("Illegal dest: " + text);
-        return code;
-    }
-
-    /**
      * Returns the text which represents the given dest code.
      * If doesn't exist, throws AssemblerException.
      */
@@ -153,17 +131,6 @@ public class HackAssemblerTranslator {
         if (result == null)
             throw new AssemblerException("Illegal dest: " + code);
         return result;
-    }
-
-    /**
-     * Returns the code which represents the given jmp text.
-     * If doesn't exist, throws AssemblerException.
-     */
-    public short getJmpByText(String text) throws AssemblerException {
-        Short code = (Short)jmpToCode.get(text);
-        if (code == null)
-            throw new AssemblerException("Illegal jmp: " + text);
-        return code;
     }
 
     /**

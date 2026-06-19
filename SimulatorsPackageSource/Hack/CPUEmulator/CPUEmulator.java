@@ -440,14 +440,6 @@ public class CPUEmulator extends HackSimulator implements ComputerPartErrorEvent
         cpu.getBus1().setAnimationSpeed(speedUnit);
     }
 
-    public int getInitialAnimationMode() {
-        return HackController.DISPLAY_CHANGES;
-    }
-
-    public int getInitialNumericFormat() {
-        return HackController.DECIMAL_FORMAT;
-    }
-
     public void refresh() {
         cpu.getBus().refreshGUI();
         cpu.getBus1().refreshGUI();

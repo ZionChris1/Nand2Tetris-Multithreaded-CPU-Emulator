@@ -371,7 +371,7 @@ public class CPU
 										   ": Destination is M but A=" +
 										   address +
 										   " is an illegal memory address.");
-            A1.setUpdatePointer(true);
+            //A1.setUpdatePointer(true);
 			bus1.send1(alu1, 2, M, address);
             A1.setUpdatePointer(false);
         }

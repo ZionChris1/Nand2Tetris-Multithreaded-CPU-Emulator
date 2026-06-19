@@ -19,7 +19,6 @@ package Hack.CPUEmulator;
 
 import Hack.Controller.*;
 import Hack.ComputerParts.*;
-import java.awt.event.*;
 
 /**
  * An interface for a GUI of the CPU emulator.
@@ -75,11 +74,6 @@ public interface CPUEmulatorGUI extends HackSimulatorGUI {
      */
     ALUGUI getALU();
     ALUGUI getALU1();
-
-    /**
-     * Registers the given listener to listen to key events.
-     */
-    void addKeyListener(KeyListener listener);
 
     /**
      * Sets the focus on the CPUEmulator's frame

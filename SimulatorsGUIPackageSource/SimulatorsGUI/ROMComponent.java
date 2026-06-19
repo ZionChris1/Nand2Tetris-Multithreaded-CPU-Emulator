@@ -64,9 +64,6 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     // The combo box for choosing the numeric format.
     protected JComboBox romFormat = new JComboBox(format);
 
-    // The name of the current program.
-    private String programFileName;
-
     /**
      * Constructs a new ROMComponent.
      */
@@ -133,13 +130,6 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
 
     protected DefaultTableCellRenderer getCellRenderer() {
         return new ROMTableCellRenderer();
-    }
-
-    /**
-     * Sets the current program file name with the given name.
-     */
-    public void setProgram(String programFileName) {
-        this.programFileName = programFileName;
     }
 
     /**
@@ -213,7 +203,7 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
         loadButton.setToolTipText("Load Program");
         loadButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                loadButton_actionPerformed(e);
+                loadButton_actionPerformed();
             }
         });
         messageTxt.setBackground(SystemColor.info);
@@ -231,7 +221,7 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
         romFormat.setToolTipText("Display Format");
         romFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                romFormat_actionPerformed(e);
+                romFormat_actionPerformed();
             }
         });
         this.add(messageTxt, null);
@@ -260,7 +250,7 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     /**
      * Implements the action of clicking the load button.
      */
-    public void loadButton_actionPerformed(ActionEvent e) {
+    public void loadButton_actionPerformed() {
         loadProgram();
     }
 
@@ -268,7 +258,7 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     /**
      * Implemeting the action of changing the selected item in the combo box
      */
-    public void romFormat_actionPerformed(ActionEvent e) {
+    public void romFormat_actionPerformed() {
         String newFormat = (String)romFormat.getSelectedItem();
         if(newFormat.equals(format[0])) {
             setNumericFormat(ASM_FORMAT);

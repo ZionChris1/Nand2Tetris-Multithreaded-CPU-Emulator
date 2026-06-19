@@ -18,7 +18,7 @@
 package HackGUI;
 
 import Hack.ComputerParts.*;
-import Hack.Events.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -37,9 +37,6 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
 
     // A vector containing the listeners to this object.
     private Vector listeners;
-
-    // A vector containing the error listeners to this object.
-    private Vector errorEventListeners;
 
     // The value of the register
     protected short value;
@@ -62,7 +59,6 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     public RegisterComponent() {
         dataFormat = Format.DEC_FORMAT;
         listeners = new Vector();
-        errorEventListeners = new Vector();
         // initializes the register
         value = 0;
         registerValue.setText(translateValueToString(value));
@@ -101,31 +97,6 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
         for(int i=0;i<listeners.size();i++) {
             ((ComputerPartEventListener)listeners.elementAt(i)).guiGainedFocus();
         }
-    }
-
-    /**
-     * Registers the given ErrorEventListener as a listener to this GUI.
-     */
-    public void addErrorListener(ErrorEventListener listener) {
-        errorEventListeners.addElement(listener);
-    }
-
-    /**
-     * Un-registers the given ErrorEventListener from being a listener to this GUI.
-     */
-    public void removeErrorListener(ErrorEventListener listener) {
-        errorEventListeners.removeElement(listener);
-    }
-
-    /**
-     * Notifies all the ErrorEventListener on an error in this gui by
-     * creating an ErrorEvent (with the error message) and sending it
-     * using the errorOccured method to all the listeners.
-     */
-    public void notifyErrorListeners(String errorMessage) {
-        ErrorEvent event = new ErrorEvent(this, errorMessage);
-        for (int i=0; i<errorEventListeners.size(); i++)
-            ((ErrorEventListener)errorEventListeners.elementAt(i)).errorOccured(event);
     }
 
     /**
@@ -246,7 +217,6 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
                 oldValue = text;
             }
             catch (NumberFormatException nfe) {
-                notifyErrorListeners("Illegal value");
                 registerValue.setText(translateValueToString(value));
             }
         }
@@ -260,11 +230,11 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     private void jbInit() {
         registerValue.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
-                registerValue_focusGained(e);
+                registerValue_focusGained();
             }
 
             public void focusLost(FocusEvent e) {
-                registerValue_focusLost(e);
+                registerValue_focusLost();
             }
         });
 
@@ -277,7 +247,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
         registerValue.setBounds(new Rectangle(36, 3, 124, 18));
         registerValue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                registerValue_actionPerformed(e);
+                registerValue_actionPerformed();
             }
         });
         this.add(registerValue, null);
@@ -291,7 +261,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     /**
      * The action of the text field gaining the focus.
      */
-    public void registerValue_focusGained(FocusEvent e) {
+    public void registerValue_focusGained() {
         oldValue = registerValue.getText();
         notifyListeners();
     }
@@ -299,14 +269,14 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
     /**
      * The action of the text field loosing the focus.
      */
-    public void registerValue_focusLost(FocusEvent e) {
+    public void registerValue_focusLost() {
         valueChanged();
     }
 
     /**
      * Implements the action of changing the text of this register.
      */
-    public void registerValue_actionPerformed(ActionEvent e) {
+    public void registerValue_actionPerformed() {
         valueChanged();
     }
 }

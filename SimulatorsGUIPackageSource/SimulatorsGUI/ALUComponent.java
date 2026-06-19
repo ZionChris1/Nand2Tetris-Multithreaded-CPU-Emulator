@@ -85,9 +85,6 @@ public class ALUComponent extends JPanel implements ALUGUI{
     // The null value of this ALU
     protected short nullValue;
 
-    // a boolean field specifying if the null value should be activated or not.
-    protected boolean hideNullValue;
-
 
     /**
      * Constructs a new ALUComponent.
@@ -102,30 +99,7 @@ public class ALUComponent extends JPanel implements ALUGUI{
      */
     public void setNullValue (short value, boolean hideNullValue) {
         nullValue = value;
-        this.hideNullValue = hideNullValue;
     }
-
-    /**
-     * Translates a given short to a string according to the current format.
-     */
-    protected String translateValueToString(short value) {
-        if(hideNullValue) {
-            if(value == nullValue)
-                return "";
-            else
-                return Format.translateValueToString(value, dataFormat);
-        }
-        else return Format.translateValueToString(value, dataFormat);
-
-    }
-
-    /**
-     * Enabling and diabling user inputs. those methods aren't implemented
-     * because in the ALU the text fields are always disabled.
-     */
-    public void disableUserInput() {}
-    public void enableUserInput() {}
-
 
     /**
      * Flashes the ALU command.
@@ -300,8 +274,8 @@ public class ALUComponent extends JPanel implements ALUGUI{
         g2.setPaint(Color.black);
 
         // fill and stroke GeneralPath
-        int x4Points[] = {START_ALU_X, FINISH_ALU_X, FINISH_ALU_X, START_ALU_X};
-        int y4Points[] = {23, 56, 83, 116};
+        int[] x4Points = {START_ALU_X, FINISH_ALU_X, FINISH_ALU_X, START_ALU_X};
+        int[] y4Points = {23, 56, 83, 116};
 
         GeneralPath filledPolygon = new GeneralPath(GeneralPath.WIND_EVEN_ODD,x4Points.length);
         filledPolygon.moveTo(x4Points[0],y4Points[0]);

@@ -122,9 +122,6 @@ public class ScriptTokenizer {
     // The current int value
     private int intValue;
 
-    // The current string value
-    private String stringValue;
-
     // The current identifier
     private String identifier;
 
@@ -233,14 +230,6 @@ public class ScriptTokenizer {
      */
     public int getIntValue() {
         return intValue;
-    }
-
-    /**
-     * Returns the string value of the current token
-     * May only be called when getTokenType() == STRING_CONST
-     */
-    public String getStringValue() {
-        return stringValue;
     }
 
     /**

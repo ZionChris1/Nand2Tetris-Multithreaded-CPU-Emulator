@@ -75,33 +75,8 @@ public class Definitions {
      */
     public static final short VAR_START_ADDRESS = 16;
 
-    /**
-     * Address of the end of variable storage area
-     */
-    public static final short VAR_END_ADDRESS = 255;
-
 
     // Memory segments
-
-    /**
-     * The start address of the global stack
-     */
-    public static final short STACK_START_ADDRESS = 256;
-
-    /**
-     * The end address of the global stack
-     */
-    public static final short STACK_END_ADDRESS = 2047;
-
-    /**
-     * The start address of the heap
-     */
-    public static final short HEAP_START_ADDRESS = 2048;
-
-    /**
-     * The end address of the heap
-     */
-    public static final short HEAP_END_ADDRESS = 16383;
 
     /**
      * The start address of the screen
@@ -109,24 +84,9 @@ public class Definitions {
     public static final short SCREEN_START_ADDRESS = 16384;
 
     /**
-     * The end address of the screen
-     */
-    public static final short SCREEN_END_ADDRESS = SCREEN_START_ADDRESS + SCREEN_SIZE_IN_WORDS;
-
-    /**
      * The address of the memory-mapped keyboard
      */
     public static final short KEYBOARD_ADDRESS = 24576;
-
-    /**
-     * The start address of the temp memory segment
-     */
-    public static final short TEMP_START_ADDRESS = 5;
-
-    /**
-     * The end address of the temp memory segment
-     */
-    public static final short TEMP_END_ADDRESS = 12;
 
 
     // pointers addresses
@@ -238,12 +198,6 @@ public class Definitions {
      * The address of the R15 register
      */
     public static final short R15_ADDRESS = 15;
-
-    /**
-     * Symbolizes an unknown address
-     */
-    public static final short UNKNOWN_ADDRESS = -1;
-
 
     // Assembly symbols
 

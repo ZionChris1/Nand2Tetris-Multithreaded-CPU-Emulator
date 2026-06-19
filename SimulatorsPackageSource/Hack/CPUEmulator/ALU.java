@@ -35,9 +35,6 @@ public class ALU extends ValueComputerPart {
     // The output of the ALU
     private short output;
 
-    // The dscription of the command
-    private String commandDescription;
-
     // The gui of the ALU
     private ALUGUI gui;
 
@@ -84,7 +81,6 @@ public class ALU extends ValueComputerPart {
     public synchronized void setCommand(String description,  boolean zero0, boolean negate0,
                                         boolean zero1, boolean negate1, boolean ADDorAND,
                                         boolean negateOutput) {
-        commandDescription = description;
         this.zero0 = zero0;
         this.negate0 = negate0;
         this.zero1 = zero1;

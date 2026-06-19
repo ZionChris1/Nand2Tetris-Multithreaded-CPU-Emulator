@@ -29,11 +29,4 @@ public class ProgramException extends Exception
         super(message);
     }
 
-    /**
-     * Constructs a new ProgramException with the given message and Line number.
-     */
-    public ProgramException(String message, int lineNumber) {
-        super("In line " + lineNumber + ", " + message);
-    }
-
 }

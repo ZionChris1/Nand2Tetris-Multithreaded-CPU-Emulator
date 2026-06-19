@@ -62,15 +62,6 @@ public class FileDisplayComponent extends JPanel {
     }
 
     /**
-     * Deletes the displayed file (from view only).
-     */
-    public void deleteContent() {
-        rows = new String[0];
-        fileDisplayTable.revalidate();
-        repaint();
-    }
-
-    /**
      * Refreshes the display.
      */
     public void refresh() {

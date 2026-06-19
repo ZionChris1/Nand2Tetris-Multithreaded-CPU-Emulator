@@ -43,11 +43,6 @@ public class Utilities {
     public static final Font valueFont = new FontUIResource(VALUE_FONT_NAME, 0, 12);
 
     /**
-     * The bold font for values.
-     */
-    public static final Font boldValueFont = new FontUIResource(VALUE_FONT_NAME, 1, 12);
-
-    /**
      * The big font for values.
      */
     public static final Font bigBoldValueFont = new FontUIResource(VALUE_FONT_NAME, 1, 13);
@@ -66,16 +61,6 @@ public class Utilities {
      * The small font for labels.
      */
     public static final Font smallLabelsFont = new FontUIResource(LABEL_FONT_NAME, 0, 11);
-
-    /**
-     * The big font for labels.
-     */
-    public static final Font bigLabelsFont = new FontUIResource(LABEL_FONT_NAME, 1, 14);
-
-    /**
-     * The thin big font for labels.
-     */
-    public static final Font thinBigLabelsFont = new FontUIResource(LABEL_FONT_NAME, 0, 14);
 
     /**
      * The font of the status line.

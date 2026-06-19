@@ -21,7 +21,7 @@ package Hack.ComputerParts;
  * An interface for the gui of an InteractiveValueComputerPart.
  */
 public interface InteractiveValueComputerPartGUI
- extends ValueComputerPartGUI, InteractiveComputerPartGUI {
+ extends ValueComputerPartGUI {
 
     /**
      * Registers the given ComputerPartEventListener as a listener to this GUI.

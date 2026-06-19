@@ -77,11 +77,11 @@ public class KeyboardComponent extends JPanel implements KeyboardGUI {
         keyButton.setBounds(new Rectangle(0, 0, 258, 27));
         keyButton.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
-                keyButton_focusGained(e);
+                keyButton_focusGained();
             }
 
             public void focusLost(FocusEvent e) {
-                keyButton_focusLost(e);
+                keyButton_focusLost();
             }
         });
         this.add(keyButton, null);
@@ -102,7 +102,7 @@ public class KeyboardComponent extends JPanel implements KeyboardGUI {
      * Implements the action of gaining the focus (changing the background
      * of this component).
      */
-    public void keyButton_focusGained(FocusEvent e) {
+    public void keyButton_focusGained() {
         keyButton.setBackground(UIManager.getColor("TextField.selectionBackground"));
     }
 
@@ -110,7 +110,7 @@ public class KeyboardComponent extends JPanel implements KeyboardGUI {
      * Implements the action of losing the focus (changing the background of
      * this component back to the original color).
      */
-    public void keyButton_focusLost(FocusEvent e) {
+    public void keyButton_focusLost() {
         keyButton.setBackground(UIManager.getColor("Button.background"));
     }
 }
