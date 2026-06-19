@@ -36,7 +36,6 @@ public abstract class HackSimulatorComponent extends JPanel implements HackSimul
         if(currentAdditionalDisplay != null) {
             remove(currentAdditionalDisplay);
         }
-        JComponent c = additionalComponent;
         currentAdditionalDisplay = additionalComponent;
 
         if (additionalComponent != null) {

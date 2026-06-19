@@ -19,6 +19,7 @@ package SimulatorsGUI;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
 import Hack.CPUEmulator.*;
 import Hack.Utilities.*;
@@ -102,8 +103,7 @@ public class ScreenComponent extends JPanel implements ScreenGUI, ActionListener
      * Resets the content of this component.
      */
     public void reset(){
-        for (int i = 0; i < data.length; i++)
-            data[i] = 0;
+        Arrays.fill(data, (short) 0);
 
         redraw = true;
     }

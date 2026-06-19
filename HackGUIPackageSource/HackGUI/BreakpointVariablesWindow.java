@@ -92,8 +92,8 @@ public class BreakpointVariablesWindow extends JFrame {
      * Sets the list of recognized variables with the given one.
      */
     public void setVariables(String[] newVars) {
-        for (int i=0;i<newVars.length;i++) {
-            nameCombo.addItem(newVars[i]);
+        for (String newVar : newVars) {
+            nameCombo.addItem(newVar);
         }
     }
 

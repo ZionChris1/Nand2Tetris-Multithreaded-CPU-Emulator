@@ -269,7 +269,7 @@ public class HackAssemblerTranslator {
                 short jmp = (short)(code & 0x0007);
 
                 String expText = getExpByCode(exp);
-                if (!expText.equals("")) {
+                if (!expText.isEmpty()) {
 
                     if (dest != 0) {
                         command.append(getDestByCode(dest));

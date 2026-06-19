@@ -650,7 +650,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
             if (!valuesStr[row].equals(data)) {
                 try {
                     valuesStr[row] = data;
-                    if(data.equals("") && hideNullValue)
+                    if(data.isEmpty() && hideNullValue)
                         values[row] = nullValue;
                     else
                         values[row] = translateValueToShort(data);

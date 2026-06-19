@@ -567,15 +567,15 @@ public class HackController
         varList = (VariableFormat[])command.getArg();
         StringBuffer line = new StringBuffer("|");
 
-        for (int i = 0; i < varList.length; i++) {
-            int space = varList[i].padL + varList[i].padR + varList[i].len;
-            String varName = varList[i].varName.length() > space ?
-                             varList[i].varName.substring(0, space) : varList[i].varName;
+        for (VariableFormat variableFormat : varList) {
+            int space = variableFormat.padL + variableFormat.padR + variableFormat.len;
+            String varName = variableFormat.varName.length() > space ?
+                    variableFormat.varName.substring(0, space) : variableFormat.varName;
             int leftSpace = (space - varName.length()) / 2;
             int rightSpace = space - leftSpace - varName.length();
 
             line.append(SPACES.substring(0, leftSpace) + varName +
-                        SPACES.substring(0, rightSpace) + '|');
+                    SPACES.substring(0, rightSpace) + '|');
         }
 
         outputAndCompare(line.toString());
@@ -588,33 +588,33 @@ public class HackController
 
         StringBuffer line = new StringBuffer("|");
 
-        for (int i = 0; i < varList.length; i++) {
+        for (VariableFormat variableFormat : varList) {
             // find value string (convert to require format if necessary)
-            String value = simulator.getValue(varList[i].varName);
-            if (varList[i].format != VariableFormat.STRING_FORMAT) {
+            String value = simulator.getValue(variableFormat.varName);
+            if (variableFormat.format != VariableFormat.STRING_FORMAT) {
                 int numValue;
                 try {
                     numValue = Integer.parseInt(value);
                 } catch (NumberFormatException nfe) {
-                    throw new VariableException("Variable is not numeric", varList[i].varName);
+                    throw new VariableException("Variable is not numeric", variableFormat.varName);
                 }
-                if (varList[i].format == VariableFormat.HEX_FORMAT)
+                if (variableFormat.format == VariableFormat.HEX_FORMAT)
                     value = Conversions.decimalToHex(numValue, 4);
-                else if (varList[i].format == VariableFormat.BINARY_FORMAT)
+                else if (variableFormat.format == VariableFormat.BINARY_FORMAT)
                     value = Conversions.decimalToBinary(numValue, 16);
             }
 
-            if (value.length() > varList[i].len)
-                value = value.substring(value.length() - varList[i].len);
+            if (value.length() > variableFormat.len)
+                value = value.substring(value.length() - variableFormat.len);
 
-            int leftSpace = varList[i].padL +
-                            (varList[i].format == VariableFormat.STRING_FORMAT ?
-                             0 : (varList[i].len - value.length()));
-            int rightSpace = varList[i].padR +
-                            (varList[i].format == VariableFormat.STRING_FORMAT ?
-                             (varList[i].len - value.length()) : 0);
+            int leftSpace = variableFormat.padL +
+                    (variableFormat.format == VariableFormat.STRING_FORMAT ?
+                            0 : (variableFormat.len - value.length()));
+            int rightSpace = variableFormat.padR +
+                    (variableFormat.format == VariableFormat.STRING_FORMAT ?
+                            (variableFormat.len - value.length()) : 0);
             line.append(SPACES.substring(0, leftSpace) + value +
-                        SPACES.substring(0, rightSpace) + '|');
+                    SPACES.substring(0, rightSpace) + '|');
         }
 
         outputAndCompare(line.toString());
@@ -663,9 +663,7 @@ public class HackController
         for (outi.first(), cmpi.first();
              outi.current() != CharacterIterator.DONE;
              outi.next(), cmpi.next()) {
-            if (cmpi.current() != '*' && outi.current() != cmpi.current()) {
-                return false;
-            }
+            return cmpi.current() == '*' || outi.current() == cmpi.current();
         }
         return true;
     }
@@ -1085,7 +1083,6 @@ public class HackController
     class FastForwardTask implements Runnable {
         public synchronized void run() {
             try {
-                System.runFinalization();
                 System.gc();
                 wait(300);
             } catch (InterruptedException ie) {

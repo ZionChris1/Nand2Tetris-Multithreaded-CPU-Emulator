@@ -31,8 +31,7 @@ public class CommandException extends Exception
 
     private static String commandString(String[] command) {
         StringBuffer message = new StringBuffer();
-        for (int i = 0; i < command.length; i++)
-            message.append(command[i] + " ");
+        for (String s : command) message.append(s + " ");
 
         return message.toString();
     }

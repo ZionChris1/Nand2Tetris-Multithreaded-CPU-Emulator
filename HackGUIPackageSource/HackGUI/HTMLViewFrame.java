@@ -29,10 +29,10 @@ import javax.swing.event.*;
 public class HTMLViewFrame extends JFrame {
 
     // The scroll pane for this frame
-    private JScrollPane scrollPane;
+    private final JScrollPane scrollPane;
 
     // The editor pane for displaying the HTML file.
-    private JEditorPane ep = new JEditorPane();
+    private final JEditorPane ep = new JEditorPane();
 
     /**
      * Constructs a new HTMLViewFrame for the given HTML file.
@@ -63,8 +63,7 @@ class Hyperactive implements HyperlinkListener {
     public void hyperlinkUpdate(HyperlinkEvent e) {
         if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
             JEditorPane pane = (JEditorPane) e.getSource();
-            if (e instanceof HTMLFrameHyperlinkEvent) {
-                HTMLFrameHyperlinkEvent  evt = (HTMLFrameHyperlinkEvent)e;
+            if (e instanceof HTMLFrameHyperlinkEvent evt) {
                 HTMLDocument doc = (HTMLDocument)pane.getDocument();
                 doc.processHTMLFrameHyperlinkEvent(evt);
             } else {
