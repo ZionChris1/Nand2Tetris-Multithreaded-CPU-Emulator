@@ -80,10 +80,14 @@ public class PointedMemoryComponent extends MemoryComponent implements PointedMe
     public class PointedMemoryTableCellRenderer extends MemoryTableCellRenderer {
 
         public void setRenderer(int row, int column) {
-            if (row == pointerAddress)
-                setBackground(Color.yellow);
+            if (row == pointerAddress) {
+                if (pointerAddress == pointerAddress1)
+                    setBackground(Color.yellow);
+                else
+                    setBackground(Color.green);
+            }
             else if (row == pointerAddress1)
-                setBackground(Color.blue);
+                setBackground(new Color(0xFFFF0000, true));
             else
                 setBackground(null);
 

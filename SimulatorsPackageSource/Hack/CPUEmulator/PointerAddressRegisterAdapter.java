@@ -66,8 +66,10 @@ public class PointerAddressRegisterAdapter extends Register {
     public void reset() {
         super.reset();
 
-        if (updatePointer)
+        if (updatePointer) {
             memory.setPointerAddress(0);
+            memory.setPointerAddress1(0);
+        }
     }
 
     public void reset1() {
