@@ -74,9 +74,6 @@ public class ALUComponent extends JPanel implements ALUGUI{
     // The label with the string "ALU".
      private JLabel nameLbl = new JLabel();
 
-    // The border of the alu's command.
-    private Border commandBorder;
-
     // creating the labels of the inputs and outputs.
     private JLabel location0Lbl = new JLabel();
     private JLabel location1Lbl = new JLabel();
@@ -312,7 +309,8 @@ public class ALUComponent extends JPanel implements ALUGUI{
     // Initializes this component.
     private void jbInit()  {
         setOpaque(false);
-        commandBorder = BorderFactory.createLineBorder(Color.black,1);
+        // The border of the alu's command.
+        Border commandBorder = BorderFactory.createLineBorder(Color.black, 1);
         this.setLayout(null);
         location0.setForeground(Color.black);
         location0.setDisabledTextColor(Color.black);

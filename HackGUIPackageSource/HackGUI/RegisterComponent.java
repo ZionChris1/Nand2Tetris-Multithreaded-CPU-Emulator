@@ -245,11 +245,7 @@ public class RegisterComponent extends JPanel implements RegisterGUI {
         registerValue.setDisabledTextColor(Color.black);
         registerValue.setHorizontalAlignment(SwingConstants.RIGHT);
         registerValue.setBounds(new Rectangle(36, 3, 124, 18));
-        registerValue.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                registerValue_actionPerformed();
-            }
-        });
+        registerValue.addActionListener(e -> registerValue_actionPerformed());
         this.add(registerValue, null);
         this.add(registerName, null);
 

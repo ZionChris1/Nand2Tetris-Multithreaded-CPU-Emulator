@@ -107,9 +107,6 @@ public class ScriptTokenizer {
     // Hashtable containing the keywords of the language
     private Hashtable keywords;
 
-    // Hashtable containing the symbols of the language
-    private Hashtable symbols;
-
     // The type of the current token
     private int tokenType;
 
@@ -143,7 +140,6 @@ public class ScriptTokenizer {
             parser.wordChars(']', ']');
             parser.nextToken();
             initKeywords();
-            initSymbols();
         } catch (IOException ioe) {
             throw new ControllerException("Error while initializing script for reading");
         }
@@ -269,16 +265,4 @@ public class ScriptTokenizer {
         keywords.put("while", KW_WHILE);
     }
 
-    // Initializes the symbols hashtable
-    private void initSymbols() {
-        symbols = new Hashtable();
-        symbols.put("{","{");
-        symbols.put("}","}");
-        symbols.put(",",",");
-        symbols.put(";",";");
-        symbols.put("!","!");
-        symbols.put("=","=");
-        symbols.put(">",">");
-        symbols.put("<","<");
-    }
 }

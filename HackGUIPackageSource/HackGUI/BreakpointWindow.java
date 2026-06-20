@@ -49,9 +49,6 @@ public class BreakpointWindow extends JFrame implements MouseListener, Breakpoin
     private JButton removeButton = new JButton();
     private JButton okButton = new JButton();
 
-    // The cell renderer of the table.
-    private ColoredTableCellRenderer coloredRenderer = new ColoredTableCellRenderer();
-
     // Creating icons.
     private ImageIcon addIcon = new ImageIcon(Utilities.imagesDir + "smallplus.gif");
     private ImageIcon removeIcon = new ImageIcon(Utilities.imagesDir + "smallminus.gif");
@@ -71,6 +68,8 @@ public class BreakpointWindow extends JFrame implements MouseListener, Breakpoin
         breakpoints = new Vector();
         model = new BreakpointTableModel();
         breakpointTable = new JTable(model);
+        // The cell renderer of the table.
+        ColoredTableCellRenderer coloredRenderer = new ColoredTableCellRenderer();
         breakpointTable.setDefaultRenderer(breakpointTable.getColumnClass(0), coloredRenderer);
         listeners = new Vector();
         setResizable(false);
@@ -187,27 +186,15 @@ public class BreakpointWindow extends JFrame implements MouseListener, Breakpoin
         addButton.setPreferredSize(new Dimension(35, 25));
         addButton.setToolTipText("Add breakpoint");
         addButton.setIcon(addIcon);
-        addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                addButton_actionPerformed();
-            }
-        });
+        addButton.addActionListener(e -> addButton_actionPerformed());
         removeButton.setPreferredSize(new Dimension(35, 25));
         removeButton.setToolTipText("Remove breakpoint");
         removeButton.setIcon(removeIcon);
-        removeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                removeButton_actionPerformed();
-            }
-        });
+        removeButton.addActionListener(e -> removeButton_actionPerformed());
         okButton.setPreferredSize(new Dimension(35, 25));
         okButton.setToolTipText("OK");
         okButton.setIcon(okIcon);
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                okButton_actionPerformed();
-            }
-        });
+        okButton.addActionListener(e -> okButton_actionPerformed());
         this.getContentPane().add(scrollPane, null);
         this.getContentPane().add(addButton, null);
         this.getContentPane().add(removeButton, null);

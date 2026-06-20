@@ -22,7 +22,6 @@ import Hack.CPUEmulator.*;
 import Hack.Events.*;
 import javax.swing.*;
 import java.util.Vector;
-import java.awt.event.*;
 import java.awt.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.*;
@@ -46,9 +45,6 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     // The icon on the load file button.
     private ImageIcon loadIcon = new ImageIcon(Utilities.imagesDir + "open2.gif");
 
-    // The file filter of this component.
-    private FileFilter filter;
-
     // The file chooser component.
     private JFileChooser fileChooser;
 
@@ -70,7 +66,8 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
     public ROMComponent() {
         dataFormat = ASM_FORMAT;
         programEventListeners = new Vector();
-        filter = new ROMFileFilter();
+        // The file filter of this component.
+        FileFilter filter = new ROMFileFilter();
         fileChooser = new JFileChooser();
         fileChooser.setFileFilter(filter);
         jbInit();
@@ -201,11 +198,7 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
         loadButton.setIcon(loadIcon);
         loadButton.setBounds(new Rectangle(97, 2, 31, 25));
         loadButton.setToolTipText("Load Program");
-        loadButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                loadButton_actionPerformed();
-            }
-        });
+        loadButton.addActionListener(e -> loadButton_actionPerformed());
         messageTxt.setBackground(SystemColor.info);
         messageTxt.setEnabled(false);
         messageTxt.setFont(Utilities.labelsFont);
@@ -219,11 +212,7 @@ public class ROMComponent extends PointedMemoryComponent implements ROMGUI {
         romFormat.setBounds(new Rectangle(39, 3, 56, 23));
         romFormat.setFont(Utilities.thinLabelsFont);
         romFormat.setToolTipText("Display Format");
-        romFormat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                romFormat_actionPerformed();
-            }
-        });
+        romFormat.addActionListener(e -> romFormat_actionPerformed());
         this.add(messageTxt, null);
         this.add(loadButton);
         this.add(romFormat, null);

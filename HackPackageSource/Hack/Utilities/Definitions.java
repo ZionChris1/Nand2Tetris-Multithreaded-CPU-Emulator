@@ -440,10 +440,9 @@ public class Definitions {
      */
     public String getKeyName(KeyEvent e) {
         String modifiers = KeyEvent.getKeyModifiersText(e.getModifiers());
-        String result = modifiers + (!modifiers.isEmpty() ? "+" : "")
-                        + KeyEvent.getKeyText(e.getKeyCode());
 
-        return result;
+        return modifiers + (!modifiers.isEmpty() ? "+" : "")
+                        + KeyEvent.getKeyText(e.getKeyCode());
     }
 
     // initializes address translation table

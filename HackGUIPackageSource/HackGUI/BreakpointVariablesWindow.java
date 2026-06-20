@@ -137,25 +137,13 @@ public class BreakpointVariablesWindow extends JFrame {
         nameTxt.setBounds(new Rectangle(53, 10, 115, 19));
         valueTxt.setBounds(new Rectangle(53, 42, 115, 19));
         nameCombo.setBounds(new Rectangle(180, 10, 124, 19));
-        nameCombo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                nameCombo_actionPerformed();
-            }
-        });
+        nameCombo.addActionListener(e -> nameCombo_actionPerformed());
         okButton.setToolTipText("Ok");
         okButton.setIcon(okIcon);
         okButton.setBounds(new Rectangle(61, 74, 63, 44));
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                okButton_actionPerformed();
-            }
-        });
+        okButton.addActionListener(e -> okButton_actionPerformed());
         cancelButton.setBounds(new Rectangle(180, 74, 63, 44));
-        cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cancelButton_actionPerformed();
-            }
-        });
+        cancelButton.addActionListener(e -> cancelButton_actionPerformed());
         cancelButton.setToolTipText("Cancel");
         cancelButton.setIcon(cancelIcon);
         this.getContentPane().add(nameLbl, null);

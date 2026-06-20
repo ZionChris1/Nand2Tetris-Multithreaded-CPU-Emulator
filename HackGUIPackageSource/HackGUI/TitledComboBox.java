@@ -78,9 +78,7 @@ public class TitledComboBox extends JPanel {
 
     // Notifies the registered listeners on an action in the combo box.
     private void notifyListeners(ActionEvent e) {
-        Iterator iter = listeners.iterator();
-        while(iter.hasNext())
-            ((ActionListener)iter.next()).actionPerformed(e);
+        for (Object listener : listeners) ((ActionListener) listener).actionPerformed(e);
     }
 
     /**

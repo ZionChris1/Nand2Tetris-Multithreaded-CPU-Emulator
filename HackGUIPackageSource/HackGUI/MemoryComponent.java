@@ -439,11 +439,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
         searchButton.setToolTipText("Search");
         searchButton.setIcon(searchIcon);
         searchButton.setBounds(new Rectangle(159, 2, 31, 25));
-        searchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                searchButton_actionPerformed();
-            }
-        });
+        searchButton.addActionListener(e -> searchButton_actionPerformed());
         memoryTable.setFont(Utilities.valueFont);
         nameLbl.setBounds(new Rectangle(3, 5, 70, 23));
         nameLbl.setFont(Utilities.labelsFont);
@@ -451,11 +447,7 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
         setBorder(BorderFactory.createEtchedBorder());
         scrollPane.setLocation(0,27);
 
-        clearButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                clearButton_actionPerformed();
-            }
-        });
+        clearButton.addActionListener(e -> clearButton_actionPerformed());
         clearButton.setIcon(clearIcon);
         clearButton.setBounds(new Rectangle(128, 2, 31, 25));
         clearButton.setToolTipText("Clear");
@@ -575,10 +567,8 @@ public class MemoryComponent extends JPanel implements MemoryGUI {
          * otherwise.
          */
         public boolean isCellEditable(int row, int col) {
-            boolean result = isEnabled && col == 1 &&
+            return isEnabled && col == 1 &&
                     (endEnabling == -1 || (row >= startEnabling && row <= endEnabling));
-
-            return result;
         }
 
         /**
